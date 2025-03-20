@@ -1,0 +1,220 @@
+*{
+	font-family: 'Montserrat Alternates', sans-serif;
+	font-weight: bold;
+}
+
+.navbar-toggle-icon{
+    background-color: #000;
+}
+       
+.nav-link{
+    color: #fff;
+}
+
+.color-custom{
+   	color: #34495E !important;
+   	/*border: 1px solid;*/
+   	padding:  10px;
+   	text-decoration: none;        	
+}
+
+/*Responsive para el icono user a lado del menu 3 rallas*/
+
+@media(min-width: 1500px) {
+  	.texto-c{       		
+  		width: 1300px;
+  		margin-left: auto !important;
+   		margin-right: auto !important;
+   	}
+}
+
+
+@media (min-width: 1400px) {
+	.navbar-custom {
+    	margin-left: 671px !important;
+	}
+}
+
+@media (min-width: 1200px) and (max-width: 1400px) { 
+
+	div#navbarSupportedContent {
+    	flex-grow: 1;
+	}       	
+
+	.navbar-custom {
+    	margin-left: 490px !important;
+	}
+
+}       
+
+
+@media(max-width: 1200px) and (min-width: 767px){
+	.navbar-custom{
+		margin-left: 340px;
+	}	
+
+}	
+
+@media(max-width: 767px){
+
+	.navbar-custom{
+		margin-left: 150px;
+	}	
+}
+
+/*Estilos de Presentación o portada slide*/
+.content{                        
+    position: relative;
+}
+
+.bg-custom{           
+    background-color: rgba(0,0,0, 0.7);            
+}
+
+.bg-custom{
+    position: absolute;
+    top:0%;
+    left: 0%;
+    right: 0%;
+    z-index: 100;
+    bottom: 0;         
+    background-color: rgba(0,0,0, 0.7);
+}   
+
+.images img{
+	height: 450px;
+	object-fit: cover;
+	object-position: top;
+}
+
+
+.texto-c{
+	position: relative;
+	top:40%;
+	margin-left: 147px;
+	margin-right: 400px;
+}
+
+/*Responsive para el texto de Portada*/
+
+@media(max-width: 991px){
+	.navbar-custom{
+		flex-direction: row;
+	}
+
+	.texto-c{				
+		margin-right: 200px !important;
+	}	
+}	
+
+@media (max-width: 767px){
+	.texto-c{
+		width: 500px;
+		margin-left: auto;
+		margin-right: auto !important;
+	}
+}
+
+@media (min-width: 575px) {	
+
+	.login-m{
+		display: none;
+	}					
+}		
+
+@media (max-width: 575px){
+
+	.product-grid img{
+		height: 400px !important;
+	}
+
+	.navbar-custom{
+		display: none;
+	}
+	.texto-c {
+		width: 350px !important;
+	}
+	.texto-c h2, .texto-c h3{
+		font-size: 1.4rem !important;				
+	}
+}
+
+/*estilos para las marcas*/
+
+.product-grid{
+	background: #fff;
+}
+
+.product-grid img{
+	height: 320px;
+	object-fit: contain;
+	object-position: center;
+}
+
+.style-productos img{
+	height: 200px;
+}	
+
+.product-grid .product-content{
+	background-color:#fff;
+    text-align:center;
+    padding:12px 0;
+}
+
+.product-grid .title{
+    font-size:16px;
+    font-weight:400;
+    letter-spacing:.5px;
+    text-transform:capitalize;
+    margin:0 0 10px;
+    transition:all .3s ease 0s
+}
+
+.product-grid .title button{color:#828282}
+
+.product-grid .title button:hover,.product-grid:hover .title a{color:#ef5777}
+
+.product-grid .price{
+    color:#333;
+    font-size:17px;
+    font-family:Montserrat, sans-serif;
+    font-weight:700;
+    letter-spacing:.6px;
+    margin-bottom:8px;
+    text-align:center;
+    transition:all .3s
+ }
+
+.product-grid .add-to-cart{
+	color:#fff;
+    font-size:13px;
+    font-weight:600;
+}
+
+.border-custom {
+    border-bottom: 1px solid #202020;
+    border-top: 1px solid #202020;
+}
+
+
+/*estilos paginación*/
+
+.pagination li {
+  margin-left: .25rem;
+  margin-right: .25rem;
+}
+
+.pagination li .page-link {
+  border-radius: .25rem;
+  border: none;
+  min-width: 2.25rem;
+  text-align: center;
+  color: #4f5464;
+}
+
+.pagination li.active .page-link,
+.pagination li .page-link:hover {
+  background-color: #198754;
+  color: #fff;
+  font-weight: bold;
+}

@@ -1,0 +1,51 @@
+*{
+	font-family: 'Montserrat', sans-serif;
+}
+
+body{	
+	background-color: rgb(9, 11, 17);
+}
+/*Estilos de Presentación o portada slide*/
+.content{                        
+    position: relative;
+}
+
+.bg-custom{           
+    background-color: rgba(0,0,0, 0.7);            
+}
+
+.bg-custom{
+    position: absolute;
+    top:0%;
+    left: 0%;
+    right: 0%;
+    z-index: 100;
+    bottom: 0;         
+    background-color: rgba(0,0,0, 0.7);
+}
+
+.images{
+	/*filter: blur(6px);*/	
+}   
+
+.images img{
+	height: 450px;
+	object-fit: cover;
+	object-position: top;	
+}
+
+
+.texto-c{
+	position: relative;
+	top:50%;
+	margin-left: 147px;
+	/*margin-right: 400px;*/
+}
+
+/*ESTILOS DEL PLAN CARDS*/
+
+.bg-c{
+	background-color: rgba(0, 0, 0, .7);
+	height: 250px;
+	/*overflow: auto;*/
+}

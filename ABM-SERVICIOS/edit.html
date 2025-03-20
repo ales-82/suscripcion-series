@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>ABM - PRODUCTO</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+	 <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript">
+    	if(!sessionStorage.getItem('usuario')){
+    		window.location.href="login.html"
+    	}
+    </script>		
+</head>
+<body>
+	<header>		
+		<nav class="navbar navbar-expand-lg shadow navbar-dark bg-dark">
+		  <div class="container">
+		  	<h1 class="h6">
+		  		<a class="navbar-brand" href="index.html">
+		  			<!--<img src="images/Logo.png" alt="" width="120">-->
+		  			TV+MAS
+		  		</a>
+		  	</h1>		  	
+		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		      <span class="navbar-toggler-icon"></span>
+		    </button>		    
+		    <div class="collapse navbar-collapse" id="navbarSupportedContent">		    	
+		      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+		        <li class="nav-item">
+		          <a class="nav-link text-white" href="index.html">HOME</a>
+		        </li>		                    
+		        <li class="nav-item login-m" id="login">		    		
+		          <a class="nav-link text-white" href="login.html">
+		            <i class="fa-sharp fa-solid fa-user"></i> LOGIN
+		          </a>		          
+		        </li>
+		        <li class="nav-item login-m" id="cerrar">		        		    		
+		          <button class="nav-link btn btn-danger text-white" onclick="cerrarSesion()">
+		            <i class="fa-sharp fa-solid fa-user"></i> Cerrar Sesión
+		          </button>		          
+		        </li>		       		       
+		      </ul>		     
+		    </div>
+		  </div>
+		</nav>		
+	</header>
+	<main>
+		<div class="container w-50">
+			<h2 class="text-center bg-secondary text-white rounded my-2">
+				Actualizar Producto
+			</h2>
+			<form id="producto">
+				
+			</form>			
+		</div>
+	</main>
+
+	<footer class="bg-dark text-white text-center bg-dark text-white position-absolute w-100 bottom-0">
+			chau
+	</footer>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+	<script src="js/main.js"></script>
+
+	<script>
+		let pro = document.getElementById('producto')
+
+		const valores = window.location.search;
+
+		const urlParams = new URLSearchParams(valores);
+
+		let id = urlParams.get('id')		
+
+		fetch('http://localhost:8000/api/productos/' + id,{
+			headers:{				
+				"Content-Type":"application/json",
+				"Authorization":"Bearer " + sessionStorage.getItem('accessToken')
+			}
+		}).then((res)=>{
+			return res.json()
+		}).then((json)=>{
+			console.log(json)
+			pro.innerHTML = ''
+
+			pro.innerHTML +=`
+			<div class="form-group my-3">
+					<label for="" class="fw-folder">Nombre</label>
+					<input type="text" class="form-control" id="nombre" placeholder="nombre" value="${json[0].nombre}">
+				</div>
+				<div class="form-group my-3">
+					<label for="" class="fw-folder">Periodo</label>
+					<input type="text" class="form-control" id="periodo" placeholder="periodo" value="${json[0].periodo}">
+				</div>
+				<div class="form-group my-3">
+					<label for="" class="fw-folder">Precio</label>
+					<input type="text" class="form-control" id="precio" placeholder="precio" value="${json[0].precio}">
+				</div>
+				<div class="form-group my-3">
+					<label for="" class="fw-folder">Detalles</label>
+					<textarea class="form-control" rows="3" id="detalles">${json[0].detalles}</textarea>
+				</div>
+				 <div class="form-group text-center pt-3">
+			    	<input type="button" class="btn btn-success" value="actualizar" onclick="enviar(${json[0].id})" id="btn-edit">	
+	    		</div>	  
+			`
+		})	
+
+		function enviar(id){
+			
+			let nombre = document.getElementById('nombre').value
+			let periodo = document.getElementById('periodo').value
+			let precio = document.getElementById('precio').value
+			let detalles = document.getElementById('detalles').value
+
+			let data = {nombre, periodo, precio, detalles};
+
+			//const valores = window.location.search;
+
+			//const urlParams = new URLSearchParams(valores);
+
+			//let id = urlParams.get('id')
+
+			fetch(`http://localhost:8000/api/productos/update/${id}`,{
+				method:'POST',
+				headers:{					
+					"Content-Type":"application/json",
+					"Authorization":"Bearer " + sessionStorage.getItem('accessToken')
+				},
+				body:JSON.stringify(data),				
+			}).then(function(res){
+				return res.json()
+			}).then(function(json){
+				console.log(json)
+				if(json){
+					console.log(json)
+					alert("servicio actualizado")
+					window.location.href='index.html';						
+				}
+			}).catch((error)=>{
+				alert("Campos vacios");
+			})
+		}
+
+	</script>
+</body>
+</html>	

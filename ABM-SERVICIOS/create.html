@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>ABM - PRODUCTO</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+	 <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link rel="stylesheet" href="css/style.css">	
+    <script type="text/javascript">
+    	if(!sessionStorage.getItem('usuario')){
+    		window.location.href="login.html"
+    	}
+    </script>	
+</head>
+<body>
+	<header>		
+		<nav class="navbar navbar-expand-lg shadow navbar-dark bg-dark">
+		  <div class="container">
+		  	<h1 class="h6">
+		  		<a class="navbar-brand" href="index.html">
+		  			<!--<img src="images/Logo.png" alt="" width="120">-->
+		  			TV+MAS
+		  		</a>
+		  	</h1>		  	
+		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		      <span class="navbar-toggler-icon"></span>
+		    </button>		    
+		    <div class="collapse navbar-collapse" id="navbarSupportedContent">		    	
+		      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+		        <li class="nav-item">
+		          <a class="nav-link text-white" href="index.html">HOME</a>
+		        </li>		            
+		        <li class="nav-item login-m" id="login">		    		
+		          <a class="nav-link text-white" href="login.html">
+		            <i class="fa-sharp fa-solid fa-user"></i> LOGIN
+		          </a>		          
+		        </li>
+		        <li class="nav-item login-m" id="cerrar">		        		    		
+		          <button class="nav-link btn btn-danger text-white" onclick="cerrarSesion()">
+		            <i class="fa-sharp fa-solid fa-user"></i> Cerrar Sesión
+		          </button>		          
+		        </li>		       		       
+		      </ul>		     
+		    </div>
+		  </div>
+		</nav>		
+	</header>
+	<main>
+		<div class="container w-50">
+			<h2 class="text-center bg-secondary text-white rounded my-2">
+				PRODUCTO NUEVO
+			</h2>
+			<form>
+				<div class="form-group my-3">
+					<label for="" class="fw-folder">Nombre</label>
+					<input type="text" class="form-control" id="nombre" placeholder="nombre">
+				</div>
+				<div class="form-group my-3">
+					<label for="" class="fw-folder">Periodo</label>
+					<input type="text" class="form-control" id="periodo" placeholder="periodo">
+				</div>
+				<div class="form-group my-3">
+					<label for="" class="fw-folder">Precio</label>
+					<input type="text" class="form-control" id="precio" placeholder="precio">
+				</div>
+				<div class="form-group my-3">
+					<label for="" class="fw-folder">Detalles</label>
+					<textarea class="form-control" rows="3" id="detalles"></textarea>
+				</div>
+				 <div class="form-group text-center pt-3">
+			    	<input type="button" class="btn btn-success" value="crear" id="btn-pro">	
+	    		</div>	  
+			</form>			
+		</div>
+	</main>
+	<footer class="bg-dark text-white text-center bg-dark text-white position-absolute w-100 bottom-0">
+		DEPORTES - SERIES - ENTRETENIMIENTO - PELICULAS
+	</footer>	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+	<script>
+		
+
+		let btn = document.getElementById('btn-pro')		
+
+		btn.onclick=function(e){
+
+			e.preventDefault()
+			let nombre = document.getElementById('nombre').value
+			let periodo = document.getElementById('periodo').value
+			let precio = document.getElementById('precio').value
+			let detalles = document.getElementById('detalles').value
+
+			let data = {nombre, periodo, precio, detalles};
+
+			
+
+			fetch("http://localhost:8000/api/productos",{
+				method:"POST",
+				headers:{					
+					"Content-Type":"application/json",					
+					"Authorization":"Bearer " + sessionStorage.getItem('accessToken')
+				},
+				body:JSON.stringify(data)
+			}).then(function(res){								
+				return res.json()
+			}).then(function(json){
+				console.log(json)
+				if(json){
+					alert("servicio Registrado")
+					window.location.href='index.html';						
+					console.log(json)
+				}
+			}).catch((error=>{
+				alert("Campos vacios")
+				//console.log(error)
+			}))		
+		}						
+
+	</script>
+</body>
+</html>	
